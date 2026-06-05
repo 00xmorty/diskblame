@@ -1,7 +1,7 @@
 # diskblame
 
 <p align="center">
-  <img src="assets/demo.svg" alt="diskblame terminal demo" width="860">
+  <img src="assets/demo.gif" alt="diskblame terminal demo" width="860">
 </p>
 
 <p align="center">
