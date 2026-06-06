@@ -25,10 +25,10 @@ Type "export DISKBLAME_DEMO_DIR=$PWD; export ZDOTDIR=/tmp/diskblame-omz-demo; ex
 Sleep 1500ms
 Type "clear" Enter
 Show
-Sleep 600ms
+Sleep 900ms
 Type "./diskblame.zsh summary" Enter
-Sleep 3.2s
+Sleep 8.5s
 Type "./diskblame.zsh scan" Enter
-Sleep 2.6s
+Sleep 8.0s
 Type "./diskblame.zsh --version" Enter
-Sleep 1.8s
+Sleep 2.2s
