@@ -250,3 +250,14 @@ bash tests/test_diskblame.sh
 ## License
 
 MIT
+
+
+## Public-ready safety packet
+
+This repository also includes the DPF-20260623 public-ready review packet:
+
+- [`PUBLIC_READY_PACKET.md`](PUBLIC_READY_PACKET.md) — positioning, release notes draft, launch checklist.
+- [`DEMO_TRANSCRIPT.md`](DEMO_TRANSCRIPT.md) — sanitized terminal transcript.
+- [`SAMPLE_REPORT.md`](SAMPLE_REPORT.md) — example interpretation report.
+- [`SAFETY_POLICY.md`](SAFETY_POLICY.md) — read-only boundaries and release gate.
+
