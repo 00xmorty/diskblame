@@ -1,36 +1,24 @@
 # diskblame
 
+diskblame helps Mac users find likely contributors to Storage settings’ “System Data” before deciding what to remove.
+
 <p align="center">
   <img src="assets/demo.gif" alt="diskblame terminal demo" width="860">
 </p>
 
 <p align="center">
   <a href="https://github.com/00xmorty/diskblame/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/00xmorty/diskblame/ci.yml?branch=main&label=CI&style=flat-square"></a>
-  <a href="https://github.com/00xmorty/diskblame/releases/tag/v0.1.0"><img alt="Release v0.1.0" src="https://img.shields.io/badge/release-v0.1.0-brightgreen?style=flat-square"></a>
+  <a href="https://github.com/00xmorty/diskblame/releases/tag/v0.1.1"><img alt="Release v0.1.1" src="https://img.shields.io/badge/release-v0.1.1-brightgreen?style=flat-square"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square"></a>
   <img alt="macOS" src="https://img.shields.io/badge/platform-macOS-black?style=flat-square&logo=apple">
   <img alt="zsh" src="https://img.shields.io/badge/shell-zsh-89e051?style=flat-square">
 </p>
 
-<p align="center">
-  A tiny, read-only macOS CLI that explains likely <strong>“System Data”</strong><br>
-  disk usage buckets before you delete anything.
-</p>
-
----
-
 ## Why this exists
 
-macOS Storage can show a huge gray **System Data** block without telling you what is inside it. That makes people guess, panic-delete caches, or install aggressive cleanup tools before they understand the problem.
+Storage settings show a broad category; cleaner apps focus on removing data. diskblame puts common directory sizes and review labels together so you can understand the likely contributors before choosing a cleanup method.
 
-`diskblame` gives you one terminal command that answers:
-
-- How full is my main disk right now?
-- Which common macOS buckets are likely contributing to “System Data”?
-- Is this bucket usually safe to review, caution-worthy, or manual-only?
-- Where should I inspect manually before deleting anything?
-
-It is intentionally conservative: no sudo, no cleanup command, no background agent.
+It answers how full the main disk is, which common buckets take space, and where to inspect manually. No sudo, cleanup command or background agent.
 
 ## Highlights
 
@@ -44,24 +32,28 @@ It is intentionally conservative: no sudo, no cleanup command, no background age
 
 ## Install
 
-Clone and run directly:
+In an empty directory, download the single executable release asset and make it executable:
+
+```sh
+curl -fsSLO https://github.com/00xmorty/diskblame/releases/download/v0.1.1/diskblame.zsh && chmod +x diskblame.zsh
+```
+
+This downloads a file; it does not execute a remote install script or change your PATH. Review it before running. [Release and asset](https://github.com/00xmorty/diskblame/releases/tag/v0.1.1) · [Source](./diskblame.zsh).
+
+For a source checkout:
 
 ```sh
 git clone https://github.com/00xmorty/diskblame.git
 cd diskblame
-chmod +x diskblame.zsh
 ./diskblame.zsh summary
 ```
 
-Optional: put it on your `PATH`:
+Optional user-local PATH install (add `~/bin` to your shell PATH):
 
 ```sh
-cp diskblame.zsh /usr/local/bin/diskblame
-chmod +x /usr/local/bin/diskblame
-diskblame summary
+mkdir -p ~/bin
+cp diskblame.zsh ~/bin/diskblame
 ```
-
-No package manager is required for v0.1.0.
 
 ## Quick start
 
@@ -87,13 +79,9 @@ Prints a compact disk overview, likely System Data buckets, Time Machine snapsho
 ./diskblame.zsh summary
 ```
 
-Example:
+Illustrative output: sizes and paths below are examples, not measurements of your Mac. Buckets can overlap, so do not add their sizes together.
 
 ```text
-Disk summary for /:
-  Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on
-  /dev/disk3s1s1   228Gi    12Gi    84Gi    13%    459k  879M    0%   /
-
 Likely System Data buckets (read-only):
   SIZE     SAFETY          BUCKET                   PATH
   20G      caution         Docker data              /Users/you/Library/Containers/com.docker.docker/Data
@@ -145,9 +133,11 @@ Shows usage and the read-only safety promise.
 
 ## Safety model
 
+Permission-restricted paths may be absent. These are common contributors, not an exact reconstruction of Storage settings. Reports can expose local paths; review them before sharing. The diagnostic makes no network requests and sends no telemetry.
+
 `diskblame` is diagnostic-first.
 
-| Behavior | v0.1.0 |
+| Behavior | Supported |
 | --- | --- |
 | Requires sudo | No |
 | Deletes files | No |
@@ -163,13 +153,13 @@ Safety labels:
 - `caution`: can contain important app/user data; review app docs first.
 - `manual-only`: use macOS-supported flows; `diskblame` will not modify it.
 
-If you want a tool that automatically frees disk space, this is not that tool. If you want a small auditable CLI that tells you where to look before you act, this is that tool.
+Review paths first, then use the relevant app or macOS cleanup flow yourself.
 
 ## FAQ
 
 ### Does it delete anything?
 
-No. v0.1.0 has no delete command and performs no cleanup.
+No. It has no delete command and performs no cleanup.
 
 ### Does it require sudo?
 
@@ -193,7 +183,7 @@ Cleaner apps can be useful, but this tool is for the step before cleanup: unders
 
 ## Requirements
 
-- macOS
+- Tested on macOS 26.6.2.
 - `zsh`
 - Standard macOS tools: `df`, `du`, `awk`, `sort`, `head`
 - Optional: `tmutil` for Time Machine local snapshot counts
@@ -204,14 +194,7 @@ Cleaner apps can be useful, but this tool is for the step before cleanup: unders
 bash tests/test_diskblame.sh
 ```
 
-The smoke test validates:
-
-- zsh syntax
-- help output
-- version output
-- summary path
-- scan path
-- unknown-command failure path
+The smoke test covers syntax, help/version, summary/scan and unknown-command failure.
 
 ## Design principles
 
@@ -249,15 +232,4 @@ bash tests/test_diskblame.sh
 
 ## License
 
-MIT
-
-
-## Public-ready safety packet
-
-This repository also includes the DPF-20260623 public-ready review packet:
-
-- [`PUBLIC_READY_PACKET.md`](PUBLIC_READY_PACKET.md) — positioning, release notes draft, launch checklist.
-- [`DEMO_TRANSCRIPT.md`](DEMO_TRANSCRIPT.md) — sanitized terminal transcript.
-- [`SAMPLE_REPORT.md`](SAMPLE_REPORT.md) — example interpretation report.
-- [`SAFETY_POLICY.md`](SAFETY_POLICY.md) — read-only boundaries and release gate.
-
+[MIT](LICENSE).
