@@ -6,9 +6,12 @@ diskblame helps Mac users find likely contributors to Storage settings’ “Sys
   <img src="assets/demo.gif" alt="diskblame terminal demo" width="860">
 </p>
 
+The GIF uses illustrative data and a neutral shell. Reproduce with `vhs demo.tape` (VHS required).
+
+
 <p align="center">
   <a href="https://github.com/00xmorty/diskblame/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/00xmorty/diskblame/ci.yml?branch=main&label=CI&style=flat-square"></a>
-  <a href="https://github.com/00xmorty/diskblame/releases/tag/v0.1.1"><img alt="Release v0.1.1" src="https://img.shields.io/badge/release-v0.1.1-brightgreen?style=flat-square"></a>
+  <a href="https://github.com/00xmorty/diskblame/releases/tag/v0.1.2"><img alt="Release v0.1.2" src="https://img.shields.io/badge/release-v0.1.2-brightgreen?style=flat-square"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square"></a>
   <img alt="macOS" src="https://img.shields.io/badge/platform-macOS-black?style=flat-square&logo=apple">
   <img alt="zsh" src="https://img.shields.io/badge/shell-zsh-89e051?style=flat-square">
@@ -35,10 +38,10 @@ It answers how full the main disk is, which common buckets take space, and where
 In an empty directory, download the single executable release asset and make it executable:
 
 ```sh
-curl -fsSLO https://github.com/00xmorty/diskblame/releases/download/v0.1.1/diskblame.zsh && chmod +x diskblame.zsh
+curl -fsSLO https://github.com/00xmorty/diskblame/releases/download/v0.1.2/diskblame.zsh && chmod +x diskblame.zsh
 ```
 
-This downloads a file; it does not execute a remote install script or change your PATH. Review it before running. [Release and asset](https://github.com/00xmorty/diskblame/releases/tag/v0.1.1) · [Source](./diskblame.zsh).
+This downloads a file; it does not execute a remote install script or change your PATH. Review it before running. [Release and asset](https://github.com/00xmorty/diskblame/releases/tag/v0.1.2) · [Source](./diskblame.zsh).
 
 For a source checkout:
 
