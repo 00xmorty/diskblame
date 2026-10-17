@@ -1,4 +1,4 @@
-export ZSH="/tmp/morty-oh-my-zsh-demo"
+export ZSH="/tmp/oh-my-zsh-demo"
 export ZSH_DISABLE_COMPFIX=true
 export DISABLE_AUTO_UPDATE=true
 export DISABLE_UPDATE_PROMPT=true

@@ -4,7 +4,7 @@
 
 set -u
 
-VERSION="0.1.0"
+VERSION="0.1.2"
 TOP_N=20
 
 usage() {
@@ -18,7 +18,7 @@ Usage:
   ./diskblame.zsh --version
 
 Safety:
-  - Read-only v0.1.0.
+  - Read-only v0.1.2.
   - No sudo, no delete command, no background agent.
   - Reports aggregate sizes only; it does not inspect file contents.
 EOF

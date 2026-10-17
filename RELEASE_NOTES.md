@@ -1,3 +1,9 @@
+# v0.1.2
+
+- Align executable and documented version with the release.
+- Re-record the demo using neutral users and illustrative data.
+- Preserve read-only diagnostics.
+
 # diskblame v0.1.0
 
 First public release of `diskblame`, a tiny read-only macOS CLI that explains likely “System Data” disk usage buckets before you delete anything.

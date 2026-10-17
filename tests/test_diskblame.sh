@@ -11,7 +11,7 @@ help_output="$(zsh "$SCRIPT" help)"
 [[ "$help_output" == *"Read-only"* || "$help_output" == *"read-only"* ]]
 
 version_output="$(zsh "$SCRIPT" --version)"
-[[ "$version_output" == "diskblame 0.1.0" ]]
+[[ "$version_output" == "diskblame 0.1.2" ]]
 
 scan_output="$(zsh "$SCRIPT" scan)"
 [[ "$scan_output" == *"Likely System Data buckets"* ]]
